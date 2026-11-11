@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: webhook-receiver
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    disk:
+      name: webhook-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: DB_PATH
+        value: /app/data/webhooks.db
+      - key: WEBHOOK_API_KEY
+        generateValue: true
